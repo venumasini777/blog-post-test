@@ -12,6 +12,11 @@
   "dependencies": {
     "@astrojs/check": "^0.5.10",
     "astro": "^4.9.2",
+    "tinacms": "^1.6.3",
     "typescript": "^5.4.5"
+  },
+  "devDependencies": {
+    "@tinacms/cli": "^1.5.45",
+    "@types/node": "^20.12.12"
   }
 }
