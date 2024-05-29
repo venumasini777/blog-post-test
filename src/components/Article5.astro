@@ -1,0 +1,66 @@
+---
+import { Image } from 'astro:assets';
+import myImage from '../assets/thumbNail1.png';
+---
+
+<article>
+    <div class="content">
+        <div class="heading">
+            <p>The heading comes here and can take 2 lines at max</p>
+        </div>
+        <div class="description">    
+            <p>
+                A summary of the article will come here and can take maximum of 2 lines here.
+                It’ll be grey in colour. A summary of the article will come here and can take maximum...
+            </p>
+        </div>
+    </div>
+  <div class="thumbnail">
+    <Image src={myImage} alt="Thumbnail" width="680" height="360" />
+  </div>
+  
+</article>
+
+<style>
+  article {
+    display: flex;
+    height: 400px;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .thumbnail {
+  }
+  .thumbnail img {
+    max-width: 100%;
+    height: auto;
+  }
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-bottom: 40px;
+    margin-right: 32px;
+  }
+  .heading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 32px;
+    height: 80px;
+    font-size: 32px;
+    font-weight: bold;
+    max-width: 460px;
+  }
+  .description {
+    margin: 0px;
+    height: 72px;
+    max-width: 460px;
+    font-size: 16px;
+  }
+  h6{
+    margin: 0px;
+  }
+  p{
+    margin: 0px;
+  }
+</style>

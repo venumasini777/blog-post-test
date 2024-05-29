@@ -1,0 +1,49 @@
+---
+import Page from '../components/Page.astro';
+import Layout from '../layouts/Layout.astro';
+const { navpage } = Astro.params
+
+export async function getStaticPaths() {
+  return [
+    { params: { navpage: 'stablecoins' } },
+    { params: { navpage: 'rwas' } },
+    { params: { navpage: 'staking' } },
+	{ params: { navpage: 'buying' } },
+	{ params: { navpage: 'integrations' } },
+  ]
+}
+
+const getTitle = (navpage: string) => {
+	switch(navpage){
+		case "staking":
+			return "Staking";
+		case "stablecoins":
+			return "Stable Coins";
+		case "rwas":
+			return "RWAs";
+		case "buying":
+			return "Buying";
+		case "integrations":
+			return "Integrations"
+		default:
+			return "Canto"
+	}
+
+}
+
+interface Props {
+	title: string;
+	body: string;
+	href: string;
+}
+const { href, title, body } = Astro.props;
+console.log(navpage);
+---
+
+<Layout title="Welcome to Astro.">
+	<main>
+		<section class="articles">
+			<Page title={getTitle(navpage)} body='' href='#'></Page>
+		</section>
+	</main>
+</Layout>

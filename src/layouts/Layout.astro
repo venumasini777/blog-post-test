@@ -1,0 +1,242 @@
+---
+import Header from '../components/Header.astro';
+import Navigation from '../components/Navigation.astro';
+import { Image } from 'astro:assets';
+import myImage from '../assets/logo.png';
+interface Props {
+	title: string;
+}
+
+
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Astro description" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body>
+		<main>
+		<Navigation />
+			<slot />
+		</main>
+		<footer class="footer-container">
+			<div class="subscribe-posts">
+				<div class="container">
+					<div class="row">
+						<div class="text">
+							Stay Updated with all our Posts
+						</div>
+						<div class="input-container">
+							<div class="input">
+								<input placeholder="Your Email here">
+							</div>
+							<div class="subscribe-button">
+								<button>Subscribe</button>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			<div class="logo">
+				<Image src={myImage} alt="Thumbnail" width="30" height="30" />
+			</div>
+			<div class="footer-columns">
+			  <div class="footer-column">
+				<h4>Explore</h4>
+				<ul>
+				  <li><a href="#">Bridge</a></li>
+				  <li><a href="#">Block Explorers</a></li>
+				  <li><a href="#">Note</a></li>
+				  <li><a href="#">Canto Ecosystem</a></li>
+				</ul>
+			  </div>
+			  <div class="footer-column">
+				<h4>Build</h4>
+				<ul>
+				  <li><a href="#">Documentation</a></li>
+				  <li><a href="#">GitHub</a></li>
+				  <li><a href="#">Canto Online Hacakathon</a></li>
+				</ul>
+			  </div>
+			  <div class="footer-column">
+				<h4>Learn</h4>
+				<ul>
+				  <li><a href="#">About</a></li>
+				  <li><a href="#">Free Public Infrastructure</a></li>
+				  <li><a href="#">Neo Finance</a></li>
+				  <li><a href="#">Ecosystem</a></li>
+				</ul>
+			  </div>
+			  <div class="footer-column">
+				<h4>Guides & Topics</h4>
+				<ul>
+				  <li><a href="#">Bridge to Canto</a></li>
+				  <li><a href="#">What is Note</a></li>
+				  <li><a href="#">About RWAs</a></li>
+				  <li><a href="#">WHat is CSR</a></li>
+				  <li><a href="#">Staking on Canto</a></li>
+				</ul>
+			  </div>
+			  <div class="footer-column">
+				<h4>Socials</h4>
+				<ul>
+				  <li><a href="#">X(Twitter)</a></li>
+				  <li><a href="#">Discord</a></li>
+				  
+				</ul>
+			  </div>
+			</div>
+			<div class="footer-bottom">
+			  <div class="copyright">
+				<span>&#169;</span> 2024 Canto Pub
+			  </div>
+			  <div class="terms-privacy">
+				<a href="#">Terms</a> | <a href="#">Privacy</a>
+			  </div>
+			</div>
+		  </footer>
+		
+	</body>
+</html>
+<style is:global>
+	html {
+		font-family: system-ui, sans-serif;
+		/* background: #13151a; */
+		background-size: 224px;
+	}
+	code {
+		font-family:
+			Menlo,
+			Monaco,
+			Lucida Console,
+			Liberation Mono,
+			DejaVu Sans Mono,
+			Bitstream Vera Sans Mono,
+			Courier New,
+			monospace;
+	}
+	footer {
+      background-color: #FFF;
+      padding: 40px 0;
+	  
+    }
+	.subscribe-posts {
+		display: flex;
+		flex-direction: row;
+		width: 100%;
+        height: 200px;
+		justify-content: center;
+		margin-bottom: 32px;
+    }
+	.container {
+		width: 1200px;
+        height: 200px;
+		margin-bottom: 32px;
+		background-color: #252729;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		.row {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+		}
+		.subscribe-button {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			margin-right: 16px;
+			border-radius: 8px;
+		}
+		button {
+			font-size: 16px;
+			height: 48px !important;
+			padding: 12px 24px 12px 24px;
+			background-color: #3CAD71;
+		}
+		.input-container {
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			align-items: center;
+		}
+		.input {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			margin-right: 2rem;
+			height: 48px;			
+		}
+		input {
+			height: 48px !important;
+			border-radius: 8px;
+		}
+	}
+	.text {
+		color: #FFF;
+		font-size: 32px;
+		font-weight: 600;
+		line-height: 48px;
+		max-width: 260px;
+		padding-left: 32px;
+		align-items: center;
+	}
+	
+	.logo {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		padding: 32px 0 32px 0;
+		border-top: 1px solid #DAE4DB;
+	}
+    .footer-columns {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+	  margin-left: 5%;
+    }
+    .footer-column {
+      width: 200px;
+      /* padding: 0 20px; */
+	  margin-right: 32px;
+    }
+	.footer-column:last-child {
+      width: 200px;
+      /* padding: 0 20px; */
+	  margin-right: 0px;
+    }
+    .footer-column h4 {
+      margin-bottom: 10px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .footer-column ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    .footer-column ul li {
+      margin-bottom: 5px;
+    }
+    .footer-column ul li a {
+      color: #333;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .footer-bottom {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      color: #666;
+    }
+</style>

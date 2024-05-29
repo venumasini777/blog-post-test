@@ -1,0 +1,64 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Article from '../components/Article.astro';
+import Article2 from '../components/Article2.astro';
+import Article3 from '../components/Article3.astro';
+import Article5 from './Article5.astro';
+import Article4 from './Article4.astro';
+
+interface Props {
+	title: string;
+	body: string;
+	href: string;
+}
+const { href, title, body } = Astro.props;
+---
+
+<div class="page-container">
+    <div class="title">
+        {title}
+    </div>
+    <div class="main-article">
+        <a href="/articlepage" ><Article5/></a>
+    </div>
+    <div class="row">
+        <a href="/articlepage" ><Article4 includeTag={false} /></a>
+        <a href="/articlepage" ><Article4 includeTag={false} /></a>
+        <a href="/articlepage" ><Article4 includeTag={false} /></a>
+    </div>
+    <div class="row">
+        <a href="/articlepage" ><Article4 includeTag={false} /></a>
+        <a href="/articlepage" ><Article4 includeTag={false} /></a>
+        <a href="/articlepage" ><Article4 includeTag={false} /></a>
+    </div>
+    <div class="row">
+        <a href="/articlepage" ><Article4 includeTag={false} /></a>
+        <a href="/articlepage" ><Article4 includeTag={false} /></a>
+        <a href="/articlepage" ><Article4 includeTag={false} /></a>
+    </div>
+</div>
+
+<style>
+    .page-container {
+        margin:0px 120px 0px 120px;
+    }
+    .title {
+        padding: 32px 0 32px 0px;
+        font-size: 48px;
+        border-bottom: 1px solid #DAE4DB;
+    }
+    .main-article {
+        margin-top: 32px;
+    }
+    .row {
+        display: flex;
+        flex-direction: row;
+        max-width: 100%;
+        justify-content: space-between;
+        margin-top: 16px;
+    }
+    a {
+        color: black;
+        text-decoration: none;
+    }
+</style>

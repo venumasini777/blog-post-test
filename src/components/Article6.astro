@@ -1,0 +1,115 @@
+---
+import { Image } from 'astro:assets';
+import myImage from '../assets/thumbNail1.png';
+---
+
+<article>
+    <div class="content">
+        <div class="info">
+            <div class="category">
+                Tag/Category
+            </div>
+            <div class="date">
+                Posted on 23rd March
+            </div>
+        </div>
+        <div class="heading">
+            <p>The heading comes here and can take 2 lines at max</p>
+        </div>
+        <div class="description">    
+            <p>
+                A summary of the article will come here and can take maximum of 2 lines here.
+                It’ll be grey in colour. A summary of the article will come here and can take maximum...
+            </p>
+        </div>
+    </div>
+    <div class="thumbnail">
+        <Image src={myImage} alt="Thumbnail" width="800" height="400" />
+    </div>
+    <div class="details">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
+        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco 
+        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in 
+        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat 
+        non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </div>
+    <div class="details">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
+        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco 
+        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in 
+        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat 
+        non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </div>
+    <div class="details">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
+        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco 
+        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in 
+        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat 
+        non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </div>
+  
+</article>
+
+<style>
+  article {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .thumbnail {
+    margin-bottom: 40px;
+  }
+  .thumbnail img {
+    max-width: 100%;
+    height: auto;
+  }
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-bottom: 24px;
+  }
+  .heading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 8px;
+    height: 80px;
+    font-size: 32px;
+    font-weight: bold;
+    max-width: 560px;
+  }
+  .description {
+    margin: 0px;
+    height: 72px;
+    max-width: 560px;
+    font-size: 16px;
+    line-height: 24px;
+  }
+  h6{
+    margin: 0px;
+  }
+  p{
+    margin: 0px;
+  }
+  .info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 8px;
+   }
+   .category {
+    color: green;
+   }
+   .date {
+    color: #6C6E70;
+    text-align: right;
+    font-size: 14px;
+   }
+   .details {
+    font-size: 18px;
+    line-height: 32px;
+    margin-bottom: 32px;
+   }
+
+</style>

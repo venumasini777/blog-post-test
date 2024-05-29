@@ -1,0 +1,75 @@
+---
+import { Image } from 'astro:assets';
+import myImage from '../assets/thumbNail1.png';
+interface Props {
+	includeTag : boolean;
+}
+
+const { includeTag } = Astro.props;
+---
+
+<article>
+  <div class="thumbnail">
+    <Image src={myImage} alt="Thumbnail" width="360" height="200" />
+  </div>
+  <div class="content">
+    {includeTag && <div class="category">
+      <p>Tag/Category</p>
+    </div>}
+    <div class="heading">
+      <p>The heading comes here and can take 2 lines at max</p>
+    </div>
+    <div class="description">    
+      <p>A summary of the article will come here and can take maximum of 2...
+         </p>
+      </div>
+  </div>
+</article>
+
+<style>
+  article {
+    display: flex;
+    height: 360px;
+    flex-direction: column;
+  }
+  .thumbnail {
+    margin-right: 20px;
+  }
+  .thumbnail img {
+    max-width: 100%;
+    height: auto;
+  }
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 40px;
+  }
+  .category {
+    height: 30px;
+    font-size: 14px;
+    color: #3CAD71;
+  }
+  .heading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0px;
+    height: 60px;
+    font-size: 20px;
+    font-weight: bold;
+    max-width: 360px;
+  }
+  .description {
+    margin: 0px;
+    height: 50px;
+    max-width: 360px;
+    font-size: 16px;
+  }
+  h6{
+    margin: 0px;
+  }
+  p{
+    margin: 0px;
+  }
+</style>
