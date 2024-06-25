@@ -5,6 +5,8 @@ import Article2 from '../components/Article2.astro';
 import Article3 from '../components/Article3.astro';
 import Article5 from './Article5.astro';
 import Article4 from './Article4.astro';
+import { contentfulClient } from '../contentful';
+import type { BlogPost } from '../lib/contentful';
 
 interface Props {
 	title: string;
@@ -12,6 +14,22 @@ interface Props {
 	href: string;
 }
 const { href, title, body } = Astro.props;
+const entries = await contentfulClient.getEntries<BlogPost>({
+  content_type: "blogPost",
+});
+console.log(entries);
+//console.log(entries.items[0]);
+//console.log(entries.items[1].fields.body.content[0].content);
+const posts = entries.items.map((item) => {
+	//console.log("Hi");
+  //console.log(item.fields);
+  const { title, body, featuredMedia } = item.fields;
+  return {
+    title,
+	body,
+	featuredMedia
+  };
+});
 ---
 
 <div class="page-container">
@@ -22,19 +40,19 @@ const { href, title, body } = Astro.props;
         <a href="/articlepage" ><Article5/></a>
     </div>
     <div class="row">
-        <a href="/articlepage" ><Article4 includeTag={false} /></a>
-        <a href="/articlepage" ><Article4 includeTag={false} /></a>
-        <a href="/articlepage" ><Article4 includeTag={false} /></a>
+        <a href="/blog/1" ><Article4 includeTag={false} includeTag={false} title={posts[1].title} body={posts[1].body} imageURL={posts[1].featuredMedia.fields.file.url}/></a>
+        <a href="/blog/1" ><Article4 includeTag={false} includeTag={false} title={posts[1].title} body={posts[1].body} imageURL={posts[1].featuredMedia.fields.file.url}/></a>
+        <a href="/blog/1" ><Article4 includeTag={false} includeTag={false} title={posts[1].title} body={posts[1].body} imageURL={posts[1].featuredMedia.fields.file.url}/></a>
     </div>
     <div class="row">
-        <a href="/articlepage" ><Article4 includeTag={false} /></a>
-        <a href="/articlepage" ><Article4 includeTag={false} /></a>
-        <a href="/articlepage" ><Article4 includeTag={false} /></a>
+        <a href="/blog/1" ><Article4 includeTag={false} includeTag={false} title={posts[1].title} body={posts[1].body} imageURL={posts[1].featuredMedia.fields.file.url}/></a>
+        <a href="/blog/1" ><Article4 includeTag={false} includeTag={false} title={posts[1].title} body={posts[1].body} imageURL={posts[1].featuredMedia.fields.file.url}/></a>
+        <a href="/blog/1" ><Article4 includeTag={false} includeTag={false} title={posts[1].title} body={posts[1].body} imageURL={posts[1].featuredMedia.fields.file.url}/></a>
     </div>
     <div class="row">
-        <a href="/articlepage" ><Article4 includeTag={false} /></a>
-        <a href="/articlepage" ><Article4 includeTag={false} /></a>
-        <a href="/articlepage" ><Article4 includeTag={false} /></a>
+        <a href="/blog/1" ><Article4 includeTag={false} includeTag={false} title={posts[1].title} body={posts[1].body} imageURL={posts[1].featuredMedia.fields.file.url}/></a>
+        <a href="/blog/1" ><Article4 includeTag={false} includeTag={false} title={posts[1].title} body={posts[1].body} imageURL={posts[1].featuredMedia.fields.file.url}/></a>
+        <a href="/blog/1" ><Article4 includeTag={false} includeTag={false} title={posts[1].title} body={posts[1].body} imageURL={posts[1].featuredMedia.fields.file.url}/></a>
     </div>
 </div>
 
