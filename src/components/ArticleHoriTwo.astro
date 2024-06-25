@@ -2,42 +2,65 @@
 import { Image } from 'astro:assets';
 import myImage from '../assets/thumbNail2.png';
 import type { EntryFieldTypes } from 'contentful';
-import type { DocumentNode } from '../types/contentful';
+import type { ContentNode, DocumentNode, TextNode } from '../types/contentful';
+import Layout from '../layouts/Layout.astro';
+
 interface Props {
 	title: EntryFieldTypes.Text;
 	body: DocumentNode;
   imageURL: string;
 }
 const {title, body, imageURL } = Astro.props;
+//console.log(imageURL.substring(2));
+//console.log(body);
+//console.log(body.content[1].content[0].value);
 ---
-
-<article>
-  <div class="thumbnail">
-    <Image src={myImage} alt="Thumbnail" width="160" height="160" />
-  </div>
-  <div class="content">
-    <div class="heading">
-      <p>{title}</p>
-    </div>
-    <div class="description">    
-      <p>{body.content[0].content[0].value}
-         </p>
+  <article>
+    <div class="thumbnail">
+      <div class="image-wrapper">
+        <Image src={"https:" + imageURL} alt="Thumbnail" width="160" height="160" />
       </div>
-  </div>
-</article>
+      
+    </div>
+    <div class="content">
+      <div class="heading">
+        <p>{title}</p>
+      </div>
+      <div class="description">    
+        <p>{body.content[0].content[0].value}
+          </p>
+        </div>
+    </div>
+  </article>
 
 <style>
+  .image-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+  .image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+  }
   article {
     display: flex;
     flex-direction: row;
   }
   .thumbnail {
+    width: 160px;
+    height: 160px;
+    overflow: hidden;
     margin-right: 20px;
   }
-  .thumbnail img {
+  /* .thumbnail img {
     max-width: 100%;
     height: auto;
-  }
+  } */
   .content {
     display: flex;
     flex-direction: column;
@@ -53,7 +76,7 @@ const {title, body, imageURL } = Astro.props;
     flex-direction: column;
     justify-content: center;
     margin: 0px;
-    height: 60px;
+    height: 70px;
     font-size: 20px;
     font-weight: bold;
     max-width: 380px;
@@ -65,14 +88,13 @@ const {title, body, imageURL } = Astro.props;
   }
   .description {
     margin: 0px;
-    /* height: 72px; */
     max-width: 380px;
     font-size: 16px;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; 
+    -webkit-box-orient: vertical;
   }
   h6{
     margin: 0px;

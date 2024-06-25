@@ -1,6 +1,15 @@
 ---
 import { Image } from 'astro:assets';
 import myImage from '../assets/thumbNail1.png';
+import type { EntryFieldTypes } from 'contentful';
+import type { DocumentNode } from '../types/contentful';
+
+interface Props {
+	title: EntryFieldTypes.Text;
+	body: DocumentNode;
+  imageURL: string;
+}
+const {title, body, imageURL } = Astro.props;
 ---
 
 <article>
@@ -12,11 +21,10 @@ import myImage from '../assets/thumbNail1.png';
         <p>Tag/Category</p>
     </div>
     <div class="heading">
-        <p>The heading comes here and can take 2 lines at max</p>
+        <p>{title}</p>
     </div>
     <div class="description">    
-        <p>A summary of the article will come here and can take maximum of 2 lines here.
-            It’ll be grey in colour. A summary of the article will come here and can take maximum...
+        <p>{body.content[0].content[0].value}
         </p>
     </div>
   </div>

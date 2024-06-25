@@ -1,0 +1,159 @@
+---
+import { contentfulClient } from "../../contentful";
+import Layout from "../../layouts/Layout.astro";
+import type { BlogPost } from "../../lib/contentful";
+import { renderContent } from "../../utils/renderContent";
+
+export function getStaticPaths() {
+  return [
+    {params: {id: '1'}},
+    {params: {id: '2'}},
+    {params: {id: '3'}},
+    {params: {id: '4'}},
+    {params: {id: '5'}},
+    {params: {id: '6'}},
+    {params: {id: '7'}},
+    {params: {id: '8'}},
+    {params: {id: '9'}},
+    {params: {id: '10'}},
+    {params: {id: '11'}},
+    {params: {id: '12'}},
+    {params: {id: '3'}}
+  ];
+}
+
+const { id } = Astro.params;
+console.log(id);
+console.log(Number(id) - 1);
+const idx = Number(id) - 1;
+// Assume you have a way to fetch or have the posts data available
+const entries = await contentfulClient.getEntries<BlogPost>({
+  content_type: "blogPost",
+});
+//console.log(entries);
+//console.log(entries.items[0]);
+//console.log(entries.items[1].fields.body.content[0].content);
+const posts = entries.items.map((item) => {
+	//console.log("Hi");
+  //console.log(item.fields);
+  const { title, body, featuredMedia } = item.fields;
+  return {
+    title,
+	body,
+	featuredMedia
+  };
+});
+
+const post = posts.filter((post,index) => index == idx);
+
+console.log(post);
+console.log("Hey3"+id);
+if (!post) {
+  // Handle case where the post is not found
+  throw new Error('Post not found');
+}
+console.log(post);
+//console.log(body);
+const renderedBody = renderContent(post[0].body);
+---
+<Layout title="Article Page">
+    <article>
+    
+    <div class="content">
+        <div class="info">
+            <div class="category">
+                Tag/Category
+            </div>
+            <div class="date">
+                Posted on 23rd March
+            </div>
+        </div>
+        <div class="heading">
+            <p>{post[0].title}</p>
+        </div>
+        <!-- <div class="description">
+            
+        </div> -->
+        <div class="thumbnail">
+            {post[0].featuredMedia && post[0].featuredMedia.fields && <img src={"https:" + post[0].featuredMedia.fields.file.url} alt="Thumbnail" width="160" height="160" />}
+        </div>
+        <div class="body">
+            <div class="body-content" set:html={renderedBody}></div>
+        </div>
+    </div>
+    
+    </article>
+</Layout>
+
+<style>
+  .article {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .thumbnail {
+    width: 800px;
+    height: 420px;
+    overflow: hidden;
+  }
+  .thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 24px;
+    margin-top: 24px;
+
+  }
+
+  .heading {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin-bottom: 8px;
+    height: 80px;
+    font-size: 32px;
+    font-weight: bold;
+    /* max-width: 560px; */
+    width: 800px;
+  }
+  .description {
+    margin: 0px;
+    height: 72px;
+    max-width: 560px;
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .body {
+    max-width: 800px;
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 800px;
+    margin-bottom: 8px;
+   }
+   .category {
+    color: green;
+   }
+   .date {
+    color: #6C6E70;
+    text-align: right;
+    font-size: 14px;
+   }
+   .details {
+    font-size: 18px;
+    line-height: 32px;
+    margin-bottom: 32px;
+   }
+</style>

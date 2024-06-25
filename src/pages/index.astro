@@ -1,32 +1,40 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Article from '../components/Article.astro';
+import Article from '../components/MainArticle.astro';
 import Article2 from '../components/Article2.astro';
 import Article3 from '../components/Article3.astro';
 import Article4 from '../components/Article4.astro';
 import { contentfulClient } from "../lib/contentful";
 import type { BlogPost } from "../lib/contentful";
+import ArticleHoriTwo from '../components/ArticleHoriTwo.astro';
+import { Image } from 'astro:assets';
+import myImage from '../assets/thumbNail2.png';
+import { Debug } from 'astro:components';
 
 const entries = await contentfulClient.getEntries<BlogPost>({
   content_type: "blogPost",
 });
-
+console.log(entries);
+//console.log(entries.items[0]);
+//console.log(entries.items[1].fields.body.content[0].content);
 const posts = entries.items.map((item) => {
-	console.log("Hi");
-  console.log(item.fields);
-  const { title, date, description, slug } = item.fields;
+	//console.log("Hi");
+  //console.log(item.fields);
+  const { title, body, featuredMedia } = item.fields;
   return {
     title,
-    slug,
-    description,
-    date: new Date(date).toLocaleDateString()
+	body,
+	featuredMedia
   };
 });
+//console.log(entries.items[1].fields.featuredMedia.fields);
+// console.log(posts[1].body);
+console.log(posts[1].featuredMedia);
+console
 ---
-
 <Layout title="Welcome to Astro.">
 	<main>
-		<section>
+		<!-- <section>
 			<h1>My Blog</h1>
 			<ul>
 				{posts.map((post) => (
@@ -34,21 +42,22 @@ const posts = entries.items.map((item) => {
 					<a href={`/posts/${post.slug}/`}>
 						<h2>{post.title}</h2>
 					</a>
-					<time>{post.date}</time>
-					<p>{post.description}</p>
+					<time>{post.body}</time>
+					{/* <p>{post.fields.body}</p> */}
 					</li>
 				))}
 			</ul>
-		</section>
+		</section> -->
+		
 		<section class="articles">
 			<section class="main-articles">
 				<section class="main-article">
-					<a href="/articlepage" ><Article /></a>
+					<a href="/blog/1" ><Article title={posts[0].title} body={posts[0].body} imageURL={posts[0].featuredMedia.fields.file.url}/></a>
 				</section>
 				<section class="related-articles">
-					<a href="/articlepage" ><Article2 /></a>
-					<a href="/articlepage" ><Article2 /></a>
-					<a href="/articlepage" ><Article2 /></a>
+					<a href="/blog/2" ><Article2 title={posts[1].title} body={posts[1].body} imageURL={posts[1].featuredMedia.fields.file.url}/></a>
+					<a href="/blog/3" ><Article2 title={posts[2].title} body={posts[2].body} imageURL={posts[2].featuredMedia.fields.file.url}/></a>
+					<a href="/blog/4" ><Article2 title={posts[3].title} body={posts[3].body} imageURL={posts[3].featuredMedia.fields.file.url}/></a>
 				</section>
 			</section>
 			<section class="secondary-articles">
@@ -65,12 +74,12 @@ const posts = entries.items.map((item) => {
 					</div>
 				</div>
 				<section class="second-row-articles">
-					<a href="/articlepage" ><Article3 /></a>
-					<a href="/articlepage" ><Article3 /></a>
+					<a href="/blog/5" ><ArticleHoriTwo title={posts[4].title} body={posts[4].body} imageURL={posts[4].featuredMedia.fields.file.url}/></a>
+					<a href="/blog/6" ><ArticleHoriTwo title={posts[5].title} body={posts[5].body} imageURL={posts[5].featuredMedia.fields.file.url}/></a>
 				</section>
 				<section class="second-row-articles">
-					<a href="/articlepage" ><Article3 /></a>
-					<a href="/articlepage" ><Article3 /></a>
+					<a href="/blog/7" ><ArticleHoriTwo title={posts[6].title} body={posts[6].body} imageURL={posts[6].featuredMedia.fields.file.url}/></a>
+					<a href="/blog/8" ><ArticleHoriTwo title={posts[7].title} body={posts[7].body} imageURL={posts[7].featuredMedia.fields.file.url}/></a>
 				</section>
 			</section>
 			<section class="secondary-articles">
@@ -87,12 +96,12 @@ const posts = entries.items.map((item) => {
 					</div>
 				</div>
 				<section class="second-row-articles">
-					<a href="/articlepage" ><Article3 /></a>
-					<a href="/articlepage" ><Article3 /></a>
+					<a href="/blog/9" ><Article3 title={posts[8].title} body={posts[8].body} imageURL={posts[8].featuredMedia.fields.file.url}/></a>
+					<a href="/blog/10" ><Article3 title={posts[8].title} body={posts[8].body} imageURL={posts[8].featuredMedia.fields.file.url}/></a>
 				</section>
 				<section class="second-row-articles">
-					<a href="/articlepage" ><Article3 /></a>
-					<a href="/articlepage" ><Article3 /></a>
+					<a href="/blog/11" ><Article3 title={posts[1].title} body={posts[1].body} imageURL={posts[1].featuredMedia.fields.file.url}/></a>
+					<a href="/blog/12" ><Article3 title={posts[1].title} body={posts[1].body} imageURL={posts[1].featuredMedia.fields.file.url}/></a>
 				</section>
 			</section>
 			<section class="secondary-articles">
@@ -102,14 +111,14 @@ const posts = entries.items.map((item) => {
 					</div>
 				</div>
 				<section class="second-row-articles">
-					<a href="/articlepage" ><Article4 includeTag={true}/></a>
-					<a href="/articlepage" ><Article4 includeTag={true}/></a>
-					<a href="/articlepage" ><Article4 includeTag={true}/></a>
+					<a href="/articlepage" ><Article4 includeTag={true} title={posts[1].title} body={posts[1].body} imageURL={posts[1].featuredMedia.fields.file.url} /></a>
+					<a href="/articlepage" ><Article4 includeTag={true} title={posts[1].title} body={posts[1].body} imageURL={posts[1].featuredMedia.fields.file.url} /></a>
+					<a href="/articlepage" ><Article4 includeTag={true} title={posts[1].title} body={posts[1].body} imageURL={posts[1].featuredMedia.fields.file.url}/></a>
 				</section>
 				<section class="second-row-articles">
-					<a href="/articlepage" ><Article4 includeTag={true}/></a>
-					<a href="/articlepage" ><Article4 includeTag={true}/></a>
-					<a href="/articlepage" ><Article4 includeTag={true}/></a>
+					<a href="/articlepage" ><Article4 includeTag={true} title={posts[4].title} body={posts[4].body} imageURL={posts[4].featuredMedia.fields.file.url}/></a>
+					<a href="/articlepage" ><Article4 includeTag={true} title={posts[5].title} body={posts[5].body} imageURL={posts[5].featuredMedia.fields.file.url}/></a>
+					<a href="/articlepage" ><Article4 includeTag={true} title={posts[6].title} body={posts[6].body} imageURL={posts[6].featuredMedia.fields.file.url}/></a>
 				</section>
 			</section>
 

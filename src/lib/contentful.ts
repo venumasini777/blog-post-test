@@ -1,15 +1,19 @@
 import contentful, { type EntryFieldTypes } from "contentful";
+import type { DocumentNode, FeaturedMediaType } from "../types/contentful";
 
+interface BlogPostFields {
+  title: EntryFieldTypes.Text;
+  body: DocumentNode;
+  featuredMedia: FeaturedMediaType;
+}
 export interface BlogPost {
     contentTypeId: "blogPost",
     fields: {
       title: EntryFieldTypes.Text
-      content: EntryFieldTypes.RichText,
-      date: EntryFieldTypes.Date,
-      description: EntryFieldTypes.Text,
-      slug: EntryFieldTypes.Text
+      body: DocumentNode,
+      featuredMedia: FeaturedMediaType,
     }
-  }
+}
 
 export const contentfulClient = contentful.createClient({
   space: import.meta.env.CONTENTFUL_SPACE_ID,
